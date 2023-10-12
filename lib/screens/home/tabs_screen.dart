@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class TabScreen extends StatefulWidget {
   // var favourite;
 
-  TabScreen(
+  const TabScreen(
       // this.favourite
       {super.key});
 
@@ -32,8 +32,10 @@ class _TabScreenState extends State<TabScreen> {
     return Scaffold(
       body: items![selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xff353841),
-        selectedIconTheme: const IconThemeData(color: Colors.black),
+        selectedIconTheme: const IconThemeData(color: Colors.white),
+        unselectedItemColor: Colors.grey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: selectedIndex,

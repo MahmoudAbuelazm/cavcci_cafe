@@ -6,6 +6,10 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../models/dummy_data.dart';
+import '../../widgets/cats.dart';
+import '../../widgets/products_item.dart';
+
 class Home extends StatefulWidget {
   static const routeName = '/home';
   const Home({super.key});
@@ -19,7 +23,6 @@ class _HomeState extends State<Home> {
   String? _currentAddress;
   Position? _currentPosition;
   String? _userCountry;
-  ScrollController _scrollController = ScrollController();
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
@@ -27,7 +30,7 @@ class _HomeState extends State<Home> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context as BuildContext).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
               'Location services are disabled. Please enable the services')));
       return false;
@@ -36,13 +39,13 @@ class _HomeState extends State<Home> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Location permissions are denied')));
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(context as BuildContext).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
               'Location permissions are permanently denied, we cannot request permissions.')));
       return false;
@@ -96,7 +99,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Padding(
-          padding: EdgeInsets.only(top: 15),
+          padding: const EdgeInsets.only(top: 15),
           child: Text(
             ' ${_currentAddress ?? ""}',
             style: GoogleFonts.inter(
@@ -106,13 +109,13 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 20),
+            padding: EdgeInsets.only(right: 20),
             child: Icon(Icons.call, color: Colors.black),
           ),
         ],
-        leading: Icon(Icons.location_on_outlined, color: Colors.black),
+        leading: const Icon(Icons.location_on_outlined, color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -127,7 +130,7 @@ class _HomeState extends State<Home> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
-                fillColor: Color(0xff00000000).withOpacity(0.1),
+                fillColor: const Color(0xff00000000).withOpacity(0.1),
                 filled: true,
                 hintText: "Search",
                 hintStyle: TextStyle(
@@ -158,171 +161,43 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: height * 0.02,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: height * 0.05,
-                  width: width * 0.26,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/Coffee.png'),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        "Coffee",
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: height * 0.05,
-                  width: width * 0.28,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/Desserts.png'),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        "Desserts",
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: height * 0.05,
-                  width: width * 0.28,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/Alcohol.png'),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        "Alcohol",
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: height * 0.05,
-                  width: width * 0.35,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/Alcohol Free.png'),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        "Alcohol Free",
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: width * 0.05,
-                ),
-                Container(
-                  height: height * 0.05,
-                  width: width * 0.35,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/BreakFast.png'),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        "BreakFast",
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: height * 0.05,
-            ),
+         SizedBox(
+           height: height*0.14,
+           child: GridView(
+             gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
+               maxCrossAxisExtent: 150,
+               childAspectRatio: 2.5,
+               crossAxisSpacing: 5,
+               mainAxisSpacing: 5,),
+             children: dummyCategories.map((catData) {
+               return Cat(
+                 id: catData.id,
+                 title: catData.title,
+                 imgUrl: catData.imgUrl,
+               );
+             }).toList(),
+             ),
+         ),
             Expanded(
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 210,
-                  childAspectRatio: 0.6,
+                  childAspectRatio: 0.65,
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 25,
                 ),
-                children: [
+                children: dummyItems.map((itemData) {
+                  return ProductsItem(
+                    id: itemData.id,
+                    title: itemData.title,
+                    imgUrl: itemData.imgUrl,
+                    price: itemData.price,
+
+                  );
+                }).toList() ,
+
+
+               /* [
                   for (int i = 0; i < 4; i++)
                     Container(
                       width: width * 0.4,
@@ -403,7 +278,7 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     child: Center(
-                                        child: Text(sizeofitems[i],
+                                        child: Text(itemSize[i],
                                             style: GoogleFonts.inter(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -426,14 +301,14 @@ class _HomeState extends State<Home> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                     )),
-                                Spacer(),
+                                const Spacer(),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
-                                    shape: CircleBorder(),
+                                    shape: const CircleBorder(),
                                   ),
                                   onPressed: () {},
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.add,
                                     size: 20,
                                   ),
@@ -444,10 +319,10 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                     )
-                ],
+                ],*/
               ),
             ),
-            SizedBox(height: height * 0.03)
+            //SizedBox(height: height * 0.03)
           ],
         ),
       ),

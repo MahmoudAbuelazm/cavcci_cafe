@@ -13,7 +13,7 @@ class FavouriteTab extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
-                fillColor: Color(0xff00000000).withOpacity(0.1),
+                fillColor: const Color(0xff00000000).withOpacity(0.1),
                 filled: true,
                 hintText: "Search",
                 hintStyle: TextStyle(
@@ -29,7 +29,8 @@ class FavouriteTab extends StatelessWidget {
             ),
           
         ),
-        body: Column(
+        body: null,
+      /*Column(
           children: [
             Expanded(
               child: Padding(
@@ -37,13 +38,9 @@ class FavouriteTab extends StatelessWidget {
                 child: ListView.builder(
                   itemBuilder: (ctx, index) {
                     return HotelItem(
-                        
                         imgUrl: favourites[index].imgUrl,
                         title: favourites[index].title,
                         price: favourites[index].price,
-                        
-                        
-                      
                     );
                   },
                   itemCount: favourites.length,
@@ -51,7 +48,7 @@ class FavouriteTab extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ),*/
       );
   }
 }
