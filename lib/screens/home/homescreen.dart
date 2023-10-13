@@ -19,6 +19,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    _getCurrentPosition();
+    // TODO: implement initState
+    super.initState();
+  }
+
   bool selected = false;
   String? _currentAddress;
   Position? _currentPosition;
@@ -98,24 +105,27 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Text(
-            ' ${_currentAddress ?? ""}',
-            style: GoogleFonts.inter(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              Icons.location_on_outlined,
               color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                '${_currentAddress ?? ""}',
+                style: GoogleFonts.inter(
+                  color: Colors.black,
+                  fontSize: 14.5,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Icon(Icons.call, color: Colors.black),
+          ],
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(Icons.call, color: Colors.black),
-          ),
-        ],
-        leading: const Icon(Icons.location_on_outlined, color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -161,23 +171,24 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: height * 0.02,
             ),
-         SizedBox(
-           height: height*0.14,
-           child: GridView(
-             gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
-               maxCrossAxisExtent: 150,
-               childAspectRatio: 2.5,
-               crossAxisSpacing: 5,
-               mainAxisSpacing: 5,),
-             children: dummyCategories.map((catData) {
-               return Cat(
-                 id: catData.id,
-                 title: catData.title,
-                 imgUrl: catData.imgUrl,
-               );
-             }).toList(),
-             ),
-         ),
+            SizedBox(
+              height: height * 0.14,
+              child: GridView(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 150,
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                ),
+                children: dummyCategories.map((catData) {
+                  return Cat(
+                    id: catData.id,
+                    title: catData.title,
+                    imgUrl: catData.imgUrl,
+                  );
+                }).toList(),
+              ),
+            ),
             Expanded(
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -192,12 +203,10 @@ class _HomeState extends State<Home> {
                     title: itemData.title,
                     imgUrl: itemData.imgUrl,
                     price: itemData.price,
-
                   );
-                }).toList() ,
+                }).toList(),
 
-
-               /* [
+                /* [
                   for (int i = 0; i < 4; i++)
                     Container(
                       width: width * 0.4,
