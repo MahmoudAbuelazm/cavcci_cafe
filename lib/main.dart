@@ -1,3 +1,4 @@
+import 'package:cavcci_cafe/screens/home/SettingScreen.dart';
 import 'package:cavcci_cafe/screens/home/homescreen.dart';
 import 'package:cavcci_cafe/screens/home/tabs_screen.dart';
 import 'package:cavcci_cafe/screens/open/loginscreen.dart';
@@ -17,13 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: TabScreen(),
       routes: {
         Loginscreen.routeName: (_) => const Loginscreen(),
         Signscreen.routeName: (_) => const Signscreen(),
         Resetpass.routeName: (_) => const Resetpass(),
         Home.routeName: (_) => const Home(),
         TabScreen.routeName: (_) => TabScreen(),
+        SettingScreen.routeName: (_) => const SettingScreen(),
       },
     );
   }

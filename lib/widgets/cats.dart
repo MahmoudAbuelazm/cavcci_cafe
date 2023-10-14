@@ -25,16 +25,16 @@ class _CatState extends State<Cat> {
     double height = MediaQuery.of(context).size.height;
 
     return GestureDetector(
-      onTap: (){
-       setState(() {
-         isTapped = !isTapped;
-       });
+      onTap: () {
+        setState(() {
+          isTapped = !isTapped;
+        });
       },
       child: Container(
         height: height * 0.05,
-        width: width * 0.26,
+        width: width * 0.28,
         decoration: BoxDecoration(
-          color: isTapped? Colors.black:Colors.white,
+          color: isTapped ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -47,7 +47,7 @@ class _CatState extends State<Cat> {
             Text(
               widget.title,
               style: GoogleFonts.inter(
-                color: isTapped? Colors.white :Colors.black,
+                color: isTapped ? Colors.white : Colors.black,
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),

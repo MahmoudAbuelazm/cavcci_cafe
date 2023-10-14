@@ -24,7 +24,12 @@ class _TabScreenState extends State<TabScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    items = [const Home(), FavouriteTab(), const SettingScreen(), const cart()];
+    items = [
+      const Home(),
+      FavouriteTab(),
+      const cart(),
+      const SettingScreen(),
+    ];
   }
 
   @override
@@ -48,25 +53,25 @@ class _TabScreenState extends State<TabScreen> {
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.home_outlined,
-                size: 36,
+                size: 30,
               ),
               label: ''),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.favorite_border,
-                size: 36,
+                size: 30,
               ),
               label: ''),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.shopping_cart_outlined,
-                size: 36,
+                size: 30,
               ),
               label: ''),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                size: 36,
+                size: 30,
               ),
               label: ''),
         ],

@@ -193,7 +193,7 @@ class _HomeState extends State<Home> {
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 210,
-                  childAspectRatio: 0.65,
+                  childAspectRatio: 0.6,
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 25,
                 ),
