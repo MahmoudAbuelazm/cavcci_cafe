@@ -4,12 +4,17 @@ import 'package:cavcci_cafe/screens/home/homescreen.dart';
 import 'package:cavcci_cafe/screens/home/shopscreen.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/dummy_data.dart';
+import '../../models/items.dart';
+
 class TabScreen extends StatefulWidget {
-  // var favourite;
+  final List<Items> favourites;
 
   const TabScreen(
-      // this.favourite
-      {super.key});
+      this.favourites,
+      {
+        super.key
+      });
 
   @override
   State<TabScreen> createState() => _TabScreenState();
@@ -17,6 +22,32 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
+
+  final List<Items> _favouriteItems = [];
+
+  void _toggleFavourite(String itemId) {
+    final existingIndex =
+    _favouriteItems.indexWhere((item) => item.id == itemId);
+
+    if (existingIndex >= 0) {
+      setState(() {
+        _favouriteItems.removeAt(existingIndex);
+        print("_favouriteItems = $_favouriteItems");
+      });
+    } else {
+      setState(() {
+        _favouriteItems.add(
+            dummyItems.firstWhere((item) => item.id == itemId));
+        print("_favouriteItems = $_favouriteItems");
+      });
+    }
+  }
+
+  bool _isItemFavourite(String itemId) {
+    return _favouriteItems.any((item) => item.id == itemId);
+  }
+
+  final List<Items> _availableItems = dummyItems;
   var selectedIndex = 0;
   List? items;
 
@@ -25,8 +56,8 @@ class _TabScreenState extends State<TabScreen> {
     // TODO: implement initState
     super.initState();
     items = [
-      const Home(),
-      FavouriteTab(),
+       Home(_availableItems,_toggleFavourite,_isItemFavourite,),
+      FavouriteTab(widget.favourites),
       const cart(),
       const SettingScreen(),
     ];

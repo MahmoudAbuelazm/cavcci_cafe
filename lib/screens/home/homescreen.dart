@@ -7,12 +7,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/dummy_data.dart';
+import '../../models/items.dart';
 import '../../widgets/cats.dart';
 import '../../widgets/products_item.dart';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
-  const Home({super.key});
+  final List<Items> availableItems;
+  final Function toggleFavourite;
+  final Function isItemsFavourite;
+  const Home(this.availableItems,this.toggleFavourite,this.isItemsFavourite,{super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -25,6 +29,21 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
   }
+
+ /* String? categoryTitle;
+  List<Items>? categoryHotels;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final routeArg =
+    ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+    final categoryId = routeArg['id'];
+    categoryTitle = routeArg['title']!;
+    categoryHotels = widget.availableItems.where((item) {
+      return item.category.contains(categoryId);
+    }).toList();
+  }*/
 
   bool selected = false;
   String? _currentAddress;
@@ -191,145 +210,46 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: GridView(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 210,
-                  childAspectRatio: 0.6,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 25,
-                ),
-                children: dummyItems.map((itemData) {
-                  return ProductsItem(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 210,
+                childAspectRatio: 0.6,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 25,
+              ),
+              children: dummyItems.map((itemData) {
+                return Stack(
+                  children: [
+                    ProductsItem(
                     id: itemData.id,
                     title: itemData.title,
                     imgUrl: itemData.imgUrl,
                     price: itemData.price,
-                  );
-                }).toList(),
-
-                /* [
-                  for (int i = 0; i < 4; i++)
-                    Container(
-                      width: width * 0.4,
-                      height: height * 0.7,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.32),
-                          width: 1,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              Images[i],
-                              width: width * 0.3,
-                              height: height * 0.125,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          Text(names[i],
-                              style: GoogleFonts.inter(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 3),
-                                child: Container(
-                                  width: width * 0.1,
-                                  height: height * 0.022,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Center(
-                                      child: Text('S',
-                                          style: GoogleFonts.inter(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                          ))),
-                                ),
-                              ),
-                              for (int i = 0; i < 2; i++)
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 3),
-                                  child: Container(
-                                    width: width * 0.1,
-                                    height: height * 0.022,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: Colors.black,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Center(
-                                        child: Text(itemSize[i],
-                                            style: GoogleFonts.inter(
-                                              color: Colors.black,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                            ))),
-                                  ),
-                                ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Row(
-                              children: [
-                                Text(values[i],
-                                    style: GoogleFonts.inter(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                    )),
-                                const Spacer(),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.black,
-                                    shape: const CircleBorder(),
-                                  ),
-                                  onPressed: () {},
-                                  child: const Icon(
-                                    Icons.add,
-                                    size: 20,
-                                  ),
-                                )
-                              ],
-                            ),
+                  ),
+                    Positioned(
+                      top: 15.0,
+                      right: 30.0,
+                      child: IconButton(
+                          color: Colors.white,
+                          icon: widget.isItemsFavourite(itemData.id)
+                              ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 25,
                           )
-                        ],
-                      ),
-                    )
-                ],*/
-              ),
+                              : const Icon(Icons.favorite_border,size: 25,),
+                          onPressed: () {
+                            //isLiked = !isLiked;
+                            setState(() {
+                              widget.toggleFavourite(itemData.id);
+                            });
+
+                            //print(_favouriteHotel);
+                          }),
+                    ),
+                  ]
+                );
+              }).toList(),
+                ),
             ),
             //SizedBox(height: height * 0.03)
           ],

@@ -35,26 +35,15 @@ class ProductsItem extends StatelessWidget {
           SizedBox(
             height: height * 0.02,
           ),
-          Stack(children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                imgUrl,
-                width: width * 0.3,
-                height: height * 0.125,
-                fit: BoxFit.cover,
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              imgUrl,
+              width: width * 0.3,
+              height: height * 0.125,
+              fit: BoxFit.cover,
             ),
-            const Positioned(
-              right: 10,
-              top: 10,
-              child: Icon(
-                Icons.favorite_border,
-                size: 25,
-                color: Colors.white,
-              ),
-            )
-          ]),
+          ),
           SizedBox(
             height: height * 0.02,
           ),
