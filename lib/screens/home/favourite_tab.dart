@@ -1,3 +1,6 @@
+// import 'dart:html';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,21 +9,22 @@ import '../../widgets/fav_item.dart';
 
 class FavouriteTab extends StatelessWidget {
   final List<Items> favourites;
-  const FavouriteTab( this.favourites,{super.key});
+  const FavouriteTab(this.favourites, {super.key});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            SizedBox(
-              height: height * 0.05,
-            ),
-            TextField(
+      body: Column(
+        children: [
+          SizedBox(
+            height: height * 0.05,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
@@ -39,23 +43,57 @@ class FavouriteTab extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: height * 0.05,
-            ),
-            favourites.isEmpty?
-            Center(
-              child: Text(
-                "You have no favorites yet - Start adding some (⁠◍⁠•⁠ᴗ⁠•⁠◍⁠)⁠❤",
-                style: GoogleFonts.inter(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-            ) :
-        Center(child:Text("Hello"))
-          ],
-        ),
+          ),
+          SizedBox(
+            height: height * 0.05,
+          ),
+          favourites.isEmpty
+              ? Center(
+                  child: Text(
+                    "You have no favorites yet - Start adding some (⁠◍⁠•⁠ᴗ⁠•⁠◍⁠)⁠❤",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 300,
+                        childAspectRatio: .8,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                      ),
+                      itemBuilder: (ctx, index) {
+                        return FavItem(
+                          id: favourites[index].id,
+                          imgUrl: favourites[index].imgUrl,
+                          title: favourites[index].title,
+                          price: favourites[index].price,
+                        );
+                      },
+                      itemCount: favourites.length,
+                    ),
+                  ),
+                )
+
+          // ListView.builder(
+          //   itemBuilder: (ctx, index) {
+          //     return FavItem(
+          //       id: favourites[index].id,
+          //       imgUrl: favourites[index].imgUrl,
+          //       title: favourites[index].title,
+          //       price: favourites[index].price,
+          //     );
+          //   },
+          //   itemCount: favourites.length,
+          // ),
+        ],
       ),
 
       /*Column(

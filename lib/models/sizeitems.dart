@@ -2,7 +2,7 @@ List<String> itemSize = [
   'M',
   'L',
 ];
-List<String> Images = [
+List<String> images = [
   'images/Cappuccino.png',
   'images/Hot_chocolate.png',
   'images/Espresso.png',

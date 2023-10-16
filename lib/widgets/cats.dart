@@ -34,6 +34,7 @@ class _CatState extends State<Cat> {
         height: height * 0.05,
         width: width * 0.28,
         decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 1),
           color: isTapped ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(30),
         ),

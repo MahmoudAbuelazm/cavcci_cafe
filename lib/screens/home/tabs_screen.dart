@@ -10,11 +10,7 @@ import '../../models/items.dart';
 class TabScreen extends StatefulWidget {
   final List<Items> favourites;
 
-  const TabScreen(
-      this.favourites,
-      {
-        super.key
-      });
+  const TabScreen(this.favourites, {super.key});
 
   @override
   State<TabScreen> createState() => _TabScreenState();
@@ -22,12 +18,11 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-
   final List<Items> _favouriteItems = [];
 
   void _toggleFavourite(String itemId) {
     final existingIndex =
-    _favouriteItems.indexWhere((item) => item.id == itemId);
+        _favouriteItems.indexWhere((item) => item.id == itemId);
 
     if (existingIndex >= 0) {
       setState(() {
@@ -36,8 +31,7 @@ class _TabScreenState extends State<TabScreen> {
       });
     } else {
       setState(() {
-        _favouriteItems.add(
-            dummyItems.firstWhere((item) => item.id == itemId));
+        _favouriteItems.add(dummyItems.firstWhere((item) => item.id == itemId));
         print("_favouriteItems = $_favouriteItems");
       });
     }
@@ -56,9 +50,13 @@ class _TabScreenState extends State<TabScreen> {
     // TODO: implement initState
     super.initState();
     items = [
-       Home(_availableItems,_toggleFavourite,_isItemFavourite,),
-      FavouriteTab(widget.favourites),
-      const cart(),
+      Home(
+        _availableItems,
+        _toggleFavourite,
+        _isItemFavourite,
+      ),
+      FavouriteTab(_favouriteItems),
+      const Cart(),
       const SettingScreen(),
     ];
   }

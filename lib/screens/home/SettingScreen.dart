@@ -12,6 +12,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  
   @override
   void initState() {
     _getCurrentPosition();

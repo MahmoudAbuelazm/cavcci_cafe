@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class cart extends StatelessWidget {
-  const cart({super.key});
+class Cart extends StatelessWidget {
+  const Cart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Placeholder(
+      
+    );
   }
 }

@@ -16,7 +16,8 @@ class Home extends StatefulWidget {
   final List<Items> availableItems;
   final Function toggleFavourite;
   final Function isItemsFavourite;
-  const Home(this.availableItems,this.toggleFavourite,this.isItemsFavourite,{super.key});
+  const Home(this.availableItems, this.toggleFavourite, this.isItemsFavourite,
+      {super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
- /* String? categoryTitle;
+  /* String? categoryTitle;
   List<Items>? categoryHotels;
 
   @override
@@ -210,21 +211,20 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: GridView(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 210,
-                childAspectRatio: 0.6,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 25,
-              ),
-              children: dummyItems.map((itemData) {
-                return Stack(
-                  children: [
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 210,
+                  childAspectRatio: 0.6,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 25,
+                ),
+                children: dummyItems.map((itemData) {
+                  return Stack(children: [
                     ProductsItem(
-                    id: itemData.id,
-                    title: itemData.title,
-                    imgUrl: itemData.imgUrl,
-                    price: itemData.price,
-                  ),
+                      id: itemData.id,
+                      title: itemData.title,
+                      imgUrl: itemData.imgUrl,
+                      price: itemData.price,
+                    ),
                     Positioned(
                       top: 15.0,
                       right: 30.0,
@@ -232,11 +232,14 @@ class _HomeState extends State<Home> {
                           color: Colors.white,
                           icon: widget.isItemsFavourite(itemData.id)
                               ? const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 25,
-                          )
-                              : const Icon(Icons.favorite_border,size: 25,),
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                  size: 25,
+                                )
+                              : const Icon(
+                                  Icons.favorite_border,
+                                  size: 25,
+                                ),
                           onPressed: () {
                             //isLiked = !isLiked;
                             setState(() {
@@ -246,10 +249,9 @@ class _HomeState extends State<Home> {
                             //print(_favouriteHotel);
                           }),
                     ),
-                  ]
-                );
-              }).toList(),
-                ),
+                  ]);
+                }).toList(),
+              ),
             ),
             //SizedBox(height: height * 0.03)
           ],
